@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mirAI 講師育成ロードマップ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', Meiryo, sans-serif;
+            background: linear-gradient(135deg, #ffc0e3 0%, #ffdbeb 100%);
+            color: #333;
+            line-height: 1.8;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: #666;
+            font-weight: 500;
+        }
+
+        .roadmap {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .step {
+            position: relative;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+        .step:nth-child(4) { animation-delay: 0.4s; }
+        .step:nth-child(5) { animation-delay: 0.5s; }
+
+        .step-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            width: calc(50% - 40px);
+            transition: all 0.3s ease;
+        }
+
+        .step-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .step:nth-child(odd) .step-content {
+            margin-left: auto;
+        }
+
+        .step:nth-child(even) .step-content {
+            margin-right: auto;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            z-index: 1;
+        }
+
+        .step-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 2rem;
+        }
+
+        .step-description {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .step-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .step-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+            margin-top: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: #667eea;
+            margin-top: 10px;
+        }
+
+        /* Tablet and mobile styles */
+        @media (max-width: 768px) {
+            .roadmap::before {
+                left: 30px;
+            }
+
+            .step-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+                margin-right: 0 !important;
+            }
+
+            .step-number {
+                left: 30px;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            body {
+                padding: 15px;
+            }
+
+            header {
+                padding: 30px 15px;
+                margin-bottom: 30px;
+            }
+
+            .step {
+                margin-bottom: 40px;
+            }
+
+            .step-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .roadmap::before {
+                left: 25px;
+            }
+
+            .step-number {
+                left: 25px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            .step-content {
+                width: calc(100% - 70px);
+                margin-left: 70px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 mirAI 講師育成ロードマップ</h1>
+            <p class="subtitle">生成AIスクールの講師になるための5つのステップ</p>
+        </header>
+
+        <div class="roadmap">
+            <!-- Step 1 -->
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <span class="badge">🎬 必須視聴</span>
+                    <h2 class="step-title">
+                        <span class="icon">📺</span>
+                        ポリシー研修動画
+                    </h2>
+                    <p class="step-description">
+                        講師としての第一歩はここから始まります。mirAIの理念や教育方針、講師として大切にすべき価値観を学ぶための重要な動画です。すべての講師候補の皆様に最初にご覧いただきたい内容となっています。
+                    </p>
+                    <a href="https://drive.google.com/file/d/12Brrvi1wcuGuoliIgdTvYgb0M5RNAyO9/view?usp=sharing" class="step-link" target="_blank">動画を視聴する →</a>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <span class="badge">📚 重要資料</span>
+                    <h2 class="step-title">
+                        <span class="icon">📖</span>
+                        講師向け必読資料
+                    </h2>
+                    <p class="step-description">
+                        講師として活躍するために必要な心構えと実践的なポイントをまとめた資料集です。子どもたちと向き合う際の姿勢や、効果的な指導方法について詳しく解説しています。これらの資料を通じて、mirAI講師としての基礎を固めましょう。
+                    </p>
+                    <a href="https://drive.google.com/drive/folders/1GvWxnVfW_nAbZWJIZGlzCrR-rL5dRxJ5?usp=sharing" class="step-link" target="_blank">資料を確認する →</a>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <span class="badge">👨‍🏫 授業準備</span>
+                    <h2 class="step-title">
+                        <span class="icon">🎯</span>
+                        授業用教材・資料
+                    </h2>
+                    <p class="step-description">
+                        実際に子どもたちに教える際の基本となる教材です。授業の組み立て方や伝え方の参考として活用してください。この資料を見返しながら、どのように子どもたちに分かりやすく伝えていくか、具体的なイメージを膨らませていきましょう。
+                    </p>
+                    <a href="https://drive.google.com/drive/folders/1Utwo49B_zEFzV_US-Kna2cuY3wyDlBV9?usp=sharing" class="step-link" target="_blank">教材を見る →</a>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <span class="badge">✍️ 腕試し</span>
+                    <h2 class="step-title">
+                        <span class="icon">📝</span>
+                        模擬試験
+                    </h2>
+                    <p class="step-description">
+                        生成AIに関する知識を確認するための模擬試験です。回答後、採点結果がメールアドレスに送られます。本試験の前の練習として、現在の理解度をチェックしましょう。実際の授業を始める段階で本試験を実施しますので、しっかり準備してください。
+                    </p>
+                    <a href="https://drive.google.com/drive/folders/1QCPG4gxXe0pOlf9_B1pmXmH8m6asLk02?usp=sharing" class="step-link" target="_blank">模擬試験に挑戦 →</a>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <span class="badge">🎥 実践研修</span>
+                    <h2 class="step-title">
+                        <span class="icon">🚀</span>
+                        動画教材（随時更新）
+                    </h2>
+                    <p class="step-description">
+                        Google Geminiを活用した実践的な研修動画です。企業向けに40万円で提供している本格的な研修プログラムを、講師育成用にカスタマイズした特別版となっています。最新のAI技術と実践的なノウハウを学べる内容で、随時アップデートされていきます。
+                    </p>
+                    <a href="https://drive.google.com/drive/folders/1_6BCisSy19H2JLzG4E1Dy4Dpj-9IJ9m4?usp=sharing" class="step-link" target="_blank">動画を視聴する →</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>すべてのステップを完了したら、いよいよ講師デビュー！</p>
+            <p>子どもたちの未来を一緒に創りましょう 🌟</p>
+            <div class="logo">mirAI</div>
+        </footer>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step').forEach(step => {
+            step.style.opacity = '0';
+            step.style.transform = 'translateY(30px)';
+            observer.observe(step);
+        });
+    </script>
+</body>
+</html>
